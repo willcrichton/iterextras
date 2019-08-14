@@ -1,5 +1,5 @@
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
-from tqdm import tqdm
+from tqdm.auto import tqdm
 import multiprocessing as mp
 import itertools
 from collections import defaultdict
