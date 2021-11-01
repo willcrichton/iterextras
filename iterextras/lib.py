@@ -13,14 +13,14 @@ def unzip(it, default=([], [])):
     return tuple([list(x) for x in zip(*l)])
 
 
-def par_for(f, l, process=False, workers=None, progress=True):
+def par_for(f, l, process=False, workers=None, progress=True, **kwargs):
     Pool = ProcessPoolExecutor if process else ThreadPoolExecutor
     with Pool(max_workers=mp.
               cpu_count() if workers is None else workers) as executor:
         if progress:
-            return list(tqdm(executor.map(f, l), total=len(l), smoothing=0.05))
+            return list(tqdm(executor.map(f, l, **kwargs), total=len(l), smoothing=0.05))
         else:
-            return list(executor.map(f, l))
+            return list(executor.map(f, l, **kwargs))
 
 
 def par_filter(f, l, **kwargs):
